@@ -2,7 +2,7 @@ package com.sergiuszkierat.scalatron.input
 
 import org.scalatest.{FeatureSpec, GivenWhenThen, BeforeAndAfter}
 import scala.Predef._
-import com.sergiuszkierat.scalatron.input.exception.{InvalidCommandParametersException, InvalidCommandException}
+import com.sergiuszkierat.scalatron.input.exception.{InvalidCommandParameterKeyException, InvalidCommandParametersException, InvalidCommandException}
 
 /**
  * @author Sergiusz Kierat <sergiusz.kierat@gmail.com>
@@ -49,6 +49,16 @@ class ServerOpcodeParserSpec extends FeatureSpec with BeforeAndAfter
       }
 
       assert(thrown.getMessage === "name=")
+    }
+
+    scenario("bot parse opcode with invalid parameter key 'Welcome(invalid=56)'") {
+      val invalidWelcomeOpcode = "Welcome(name=record,invalid=56,inappropriate=test)"
+
+      val thrown = intercept[InvalidCommandParameterKeyException] {
+        ServerOpcodeParser(invalidWelcomeOpcode)
+      }
+
+      assert(thrown.getMessage === "invalid,inappropriate")
     }
 
     scenario("bot parse invalid opcode 'Welcome()'") {

@@ -18,7 +18,13 @@ object NinnyBotBuild extends Build {
     libraryDependencies ++= Seq(
       "org.specs2" %% "specs2" % "2.2.2" % "test",
       "org.scalatest" %% "scalatest" % "1.9.2" % "test",
-      "org.pegdown" % "pegdown" % "1.4.1" % "test"),
+      "org.pegdown" % "pegdown" % "1.4.1" % "test",
+
+      "com.typesafe" %% "scalalogging-slf4j" % "1.0.1",
+      "org.slf4j" % "slf4j-api" % "1.7.5",
+      "org.slf4j" % "log4j-over-slf4j" % "1.7.5",  // for any java classes looking for this
+      "ch.qos.logback" % "logback-classic" % "1.0.13"
+    ),
 
     javaOptions += "-Xmx1g",
 
