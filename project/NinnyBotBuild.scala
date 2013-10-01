@@ -18,8 +18,11 @@ object NinnyBotBuild extends Build {
 
     libraryDependencies ++= Seq(
       "org.specs2" %% "specs2" % "2.2.2" % "test",
+      "org.scalatest" %% "scalatest" % "1.9.2" % "test",
       "org.pegdown" % "pegdown" % "1.4.1" % "test",
       "junit" % "junit" % "4.7" % "test"),
+
+    javaOptions += "-Xmx1g",
 
     // default parameters for scalatron play goal
     scalatronDir := file("/opt/scalatron-1.0.0.2"),
