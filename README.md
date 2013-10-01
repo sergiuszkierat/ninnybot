@@ -3,7 +3,7 @@
 == TODO ==
 
 # Technical
-* travis i testy dodac, zobaczyc pandacab to tam jest zeby to odpalic bez eclipse
+* 
 
 # Logical
 * uczenie planszy
