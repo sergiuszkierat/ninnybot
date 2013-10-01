@@ -1,5 +1,7 @@
 # NinnyBot (WIP!)
 
+[![Build Status](https://travis-ci.org/sergiuszkierat/ninnybot.png?branch=master)](https://travis-ci.org/sergiuszkierat/ninnybot)
+
 == TODO ==
 
 # Technical
