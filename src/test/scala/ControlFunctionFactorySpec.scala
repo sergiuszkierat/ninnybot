@@ -1,7 +1,7 @@
 import org.scalatest._
 
 /**
- * @author Sergiusz Kierat <sergiusz.kierat@javart.eu>
+ * @author Sergiusz Kierat <sergiusz.kierat@gmail.com>
  * @since 2013/10/01
  */
 class ControlFunctionFactorySpec extends FlatSpec {

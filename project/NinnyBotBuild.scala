@@ -1,6 +1,5 @@
 import sbt._
 import Keys._
-import Project.Setting
 import Keys.{ `package` => pack }
 
 object NinnyBotBuild extends Build {
@@ -9,7 +8,7 @@ object NinnyBotBuild extends Build {
     base = file("."),
     settings = Project.defaultSettings ++ botSettings)
 
-  def botSettings: Seq[Setting[_]] = Seq(
+  def botSettings: Seq[Def.Setting[_]] = Seq(
     version := "0.1-SNAPSHOT",
     organization := "com.seriuszkierat.ninnybot",
 
@@ -19,8 +18,7 @@ object NinnyBotBuild extends Build {
     libraryDependencies ++= Seq(
       "org.specs2" %% "specs2" % "2.2.2" % "test",
       "org.scalatest" %% "scalatest" % "1.9.2" % "test",
-      "org.pegdown" % "pegdown" % "1.4.1" % "test",
-      "junit" % "junit" % "4.7" % "test"),
+      "org.pegdown" % "pegdown" % "1.4.1" % "test"),
 
     javaOptions += "-Xmx1g",
 
