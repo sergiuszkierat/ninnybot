@@ -10,6 +10,7 @@ class ControlFunction {
   def respond(input: String) = {
     //TODO [skierat on 01/10/13]: to remove
     if (input == "insignificant") "Status(text=Hello World)"
-    else ServerOpcodeParser(input)._1
+//    else ServerOpcodeParser(input)._1
+    else "Status(text=666)"
   }
 }

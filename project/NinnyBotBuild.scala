@@ -3,27 +3,24 @@ import Keys._
 import Keys.{ `package` => pack }
 
 object NinnyBotBuild extends Build {
+  import Dependencies._
+
   lazy val root = Project(
     id = "ninnybot",
     base = file("."),
     settings = Project.defaultSettings ++ botSettings)
 
   def botSettings: Seq[Def.Setting[_]] = Seq(
-    version := "0.1-SNAPSHOT",
-    organization := "com.seriuszkierat.ninnybot",
+    version       := "0.1-SNAPSHOT",
+    organization  := "com.seriuszkierat.ninnybot",
 
-    scalaVersion := "2.10.2",
+    scalaVersion  := "2.10.2",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-optimise", "-explaintypes"),
 
-    libraryDependencies ++= Seq(
-      "org.specs2" %% "specs2" % "2.2.2" % "test",
-      "org.scalatest" %% "scalatest" % "1.9.2" % "test",
-      "org.pegdown" % "pegdown" % "1.4.1" % "test",
+    resolvers     ++= Dependencies.resolutionRepositories,
 
-      "com.typesafe" %% "scalalogging-slf4j" % "1.0.1",
-      "org.slf4j" % "slf4j-api" % "1.7.5",
-      "org.slf4j" % "log4j-over-slf4j" % "1.7.5",  // for any java classes looking for this
-      "ch.qos.logback" % "logback-classic" % "1.0.13"
+    libraryDependencies ++= Seq(
+      Test.scalatest
     ),
 
     javaOptions += "-Xmx1g",
@@ -53,4 +50,31 @@ object NinnyBotBuild extends Build {
   val scalatronDir = SettingKey[File]("scalatron-dir", "base directory of an existing Scalatron installation")
 
   val play = TaskKey[Unit]("play", "recompiles, packages and installs the bot, then starts Scalatron")
+}
+
+object Dependencies {
+  val resolutionRepositories = Seq(
+    "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
+  )
+
+  object V {
+    val specs2        = "2.2.2"
+    val scalatest     = "1.9.2"
+    val pegdown       = "1.4.1"
+    val slf4j         = "1.7.5"
+    val logback       = "1.0.13"
+    val scalalogging  = "1.0.1"
+  }
+
+  object Test {
+    val specs2      = "org.specs2"                %% "specs2"          % V.specs2     %  "test"
+    val scalatest   = "org.scalatest"             %% "scalatest"       % V.scalatest  %  "test"
+    val pegdown     = "org.pegdown"               %% "pegdown"         % V.pegdown    %  "test"
+  }
+
+  object Container {
+    val scalalogging  = "com.typesafe"              %%  "scalalogging-slf4j"    % V.scalalogging
+    val slf4j         = "org.slf4j"                 %   "slf4j-api"             % V.slf4j
+    val logback       = "ch.qos.logback"            %   "logback-classic"       % V.logback
+  }
 }

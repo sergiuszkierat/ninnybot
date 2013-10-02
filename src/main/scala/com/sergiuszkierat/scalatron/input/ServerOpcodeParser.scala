@@ -4,7 +4,6 @@ import com.sergiuszkierat.scalatron.Chars._
 import com.sergiuszkierat.scalatron.input.ServerOpcodeRegexps._
 import com.sergiuszkierat.scalatron.input.exception.{InvalidCommandParameterKeyException, InvalidCommandParametersException, InvalidCommandException}
 import scala.collection.Iterable
-import com.typesafe.scalalogging.slf4j.Logging
 
 /**
  * Utility object for parsing opcodes from server
@@ -16,7 +15,7 @@ import com.typesafe.scalalogging.slf4j.Logging
  * @see <a href="http://github.com/scalatron/scalatron/raw/master/Scalatron/doc/pdf/Scalatron%20Protocol.pdf">Scalatron Protocol</a>
  */
 //TODO [skierat on 01/10/13]: check if parameters are valid (only defined keys)
-object ServerOpcodeParser extends Logging {
+object ServerOpcodeParser {
 
   //TODO [skierat on 01/10/13]: make return List[(String, Map[String, String])]
   def apply(command: String): (String, Map[String, Any]) = {
@@ -43,7 +42,6 @@ object ServerOpcodeParser extends Logging {
     }
 
     def welcome(opcode: String, parameters: String): (String, Map[String, Any]) = {
-      logger.debug(s"Parsing '${opcode}' opcode with parameters '${parameters}'")
       val params = parameters.split(Comma)
       val keyValuePairs = params.map(splitParameterIntoKeyValue).toMap
       validateParamMapKeys(keyValuePairs.keys)
